@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ShelfLife Pro 💧</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <h1>ShelfLife <span class="emph">Pro</span> 💧</h1>
+
+      <!-- AUTH -->
+      <div id="authBox" class="authbox">
+        <button id="btnLoginEmail" class="btn primary">🔐 Accedi (Email)</button>
+        <button id="btnLoginGoogle" class="btn ghost">G</button>
+        <span id="userBadge" class="pill" style="display:none"></span>
+        <button id="btnLogout" class="btn" style="display:none">Esci</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- EDITOR -->
+      <section class="card editor">
+        <div class="row gap">
+          <input id="recipeName" class="input name" placeholder="Nome ricetta (es. Pan di Spagna Classico)" />
+          <select id="categoria" class="input">
+            <option value="">— Categoria —</option>
+            <option value="Basi cotte">Basi cotte</option>
+            <option value="Basi crude / Creme">Basi crude / Creme</option>
+            <option value="Lievitati dolci">Lievitati dolci</option>
+            <option value="Gluten free / Speciali">Gluten free / Speciali</option>
+            <option value="Varie o semilavorati">Varie o semilavorati</option>
+          </select>
+          <label class="radio"><input type="radio" name="tipoProdotto" value="crudo" checked /> Crudo</label>
+          <label class="radio"><input type="radio" name="tipoProdotto" value="cotto" /> Cotto</label>
+        </div>
+
+        <textarea id="descrizione" class="input" rows="2" placeholder="Descrizione breve (facoltativa)"></textarea>
+
+        <div class="row gap">
+          <button id="btnNew" class="btn">🆕 Nuova</button>
+          <button id="btnDuplicate" class="btn">📄 Duplica</button>
+          <button id="btnSave" class="btn success">💾 Salva</button>
+          <span id="statusBox" class="muted"></span>
+        </div>
+
+        <div class="tablewrap">
+          <table id="ingredienti">
+            <thead>
+              <tr>
+                <th>Ingrediente</th><th>g</th><th>% H₂O</th><th>aw</th>
+                <th>Acqua Totale</th><th>Acqua Libera</th><th>—</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <button id="btnAdd" class="btn line">+ Aggiungi riga</button>
+        </div>
+
+        <div class="results">
+          <div><b>Totale acqua:</b> <span id="totAcqua">0.0 g</span></div>
+          <div><b>Acqua libera:</b> <span id="totLibera">0.0 g</span></div>
+          <div><b>aw media:</b> <span id="awMedia">0.00</span></div>
+          <div><b>Rischio:</b> <span id="rischio">—</span></div>
+          <div><b>Shelf life stimata:</b> <span id="shelfLife">—</span></div>
+          <div><b>Conservazione:</b> <span id="consigli">—</span></div>
+        </div>
+
+        <textarea id="notePrivate" class="input" rows="3" placeholder="Note private (visibili solo a te)"></textarea>
+      </section>
+
+      <!-- ARCHIVIO -->
+      <aside class="card archivio">
+        <h3>📁 Archivio ricette</h3>
+        <div id="archivioBox" class="list"></div>
+      </aside>
+
+      <!-- TABELLA AW -->
+      <section class="card aw">
+        <h3>💧 Interpretazione valori aw</h3>
+        <table class="awtab">
+          <thead><tr><th>Indicatore</th><th>aw</th><th>Stabilità</th><th>Rischio</th></tr></thead>
+          <tbody>
+            <tr><td><span class="dot red"></span></td><td>0.95–1.00</td><td>Altissima umidità</td><td>Altissimo (batteri+muffe)</td></tr>
+            <tr><td><span class="dot yellow"></span></td><td>0.85–0.94</td><td>Media umidità</td><td>Medio (muffe/lieviti)</td></tr>
+            <tr><td><span class="dot green"></span></td><td>0.65–0.84</td><td>Stabile</td><td>Basso</td></tr>
+            <tr><td><span class="dot lightgreen"></span></td><td>&lt;0.60</td><td>Secco</td><td>Minimo</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="scripts/supabaseClient.js"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

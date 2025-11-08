@@ -1,0 +1,50 @@
+:root{
+  --bg:#faf8f2; --panel:#ffffff; --card:#fffef9; --ink:#2d2a22; --muted:#6f6a5b;
+  --honey:#f7c948; --honey-600:#eab308; --success:#2fbf71; --border:#ece7da;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,Segoe UI,Roboto,Arial}
+.wrap{max-width:1180px;margin:0 auto;padding:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+h1{margin:0;font-weight:800;letter-spacing:.2px}
+.emph{color:var(--honey-600)}
+.authbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px}
+
+.btn{border:1px solid var(--border);background:#fff;border-radius:8px;padding:9px 12px;cursor:pointer}
+.btn.primary{background:var(--honey);border-color:#dbaa18}
+.btn.success{background:var(--success);border-color:#229a59;color:#fff}
+.btn.ghost{background:#fff;border-color:#ddd;width:38px;height:38px;border-radius:50%;font-weight:700}
+.btn.line{margin-top:6px}
+.btn:hover{filter:brightness(.98)}
+
+.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px}
+.editor .row.gap{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.input{border:1px solid var(--border);background:#fff;border-radius:8px;padding:9px}
+.input.name{flex:1 1 260px}
+.radio{display:flex;align-items:center;gap:6px}
+
+.tablewrap{margin-top:8px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left}
+td:last-child{text-align:center}
+.results{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:6px;margin:10px 0}
+.muted{color:var(--muted)}
+
+.aw .awtab td,.aw .awtab th{padding:7px 8px}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block}
+.dot.red{background:#ff6b6b}.dot.yellow{background:#ffd166}.dot.green{background:#06d6a0}.dot.lightgreen{background:#b8f2e6}
+
+.list .ricettaItem{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;border:1px solid var(--border);border-radius:10px;background:#fff;padding:8px 10px;margin:6px 0}
+.list .ricettaItem:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.badge{display:inline-flex;align-items:center;gap:6px}
+.badge .dot{width:10px;height:10px}
+.cat{color:var(--muted);font-size:.9em}
+.rowbtn{display:flex;gap:6px}
+.delRicetta{background:#fff3c4;border:1px solid #e6c200;border-radius:8px;padding:6px 10px;cursor:pointer}
+.delRicetta:hover{background:#ffe27a}
+
+@media (max-width:980px){
+  .grid{grid-template-columns:1fr}
+  .results{grid-template-columns:1fr 1fr}
+}
