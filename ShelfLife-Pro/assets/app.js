@@ -275,6 +275,79 @@ function caricaRicetta(r){
   aggiorna();
 }
 
+// --- GESTIONE INGREDIENTI PERSONALIZZATI ---
+
+async function loadIngredientsBase() {
+  const { data, error } = await supabase.from("ingredienti").select("*").order("nome");
+  if (error) {
+    console.error("Errore caricamento ingredienti:", error);
+    return [];
+  }
+  return data;
+}
+
+async function loadCustomIngredients() {
+  const user = supabase.auth.user();
+  if (!user) return [];
+  const { data, error } = await supabase.from("custom_ingredienti").select("*").eq("user_id", user.id);
+  if (error) {
+    console.error("Errore caricamento ingredienti personali:", error);
+    return [];
+  }
+  return data;
+}
+
+async function upsertCustomIngredient(ing) {
+  const user = supabase.auth.user();
+  if (!user) {
+    alert("Effettua il login per salvare ingredienti personali.");
+    return;
+  }
+  const { error } = await supabase.from("custom_ingredienti").upsert({
+    user_id: user.id,
+    nome: ing.nome,
+    h2o: ing.h2o,
+    aw: ing.aw,
+    note: ing.note || ""
+  });
+  if (error) alert("Errore salvataggio ingrediente: " + error.message);
+  else alert("Ingrediente salvato con successo!");
+}
+
+async function populateIngredientList() {
+  const datalist = document.getElementById("ingredients-datalist");
+  datalist.innerHTML = "";
+  const base = await loadIngredientsBase();
+  const custom = await loadCustomIngredients();
+  const all = [...base, ...custom];
+  all.forEach(i => {
+    const opt = document.createElement("option");
+    opt.value = i.nome;
+    datalist.appendChild(opt);
+  });
+}
+
+function setupIngredientDialog() {
+  const btnAdd = document.getElementById("btn-add-ingredient");
+  const dialog = document.getElementById("dlg-ingredient");
+  const form = document.getElementById("dlg-ingredient-form");
+
+  btnAdd?.addEventListener("click", () => dialog.showModal());
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const ing = {
+      nome: document.getElementById("dlg-name").value.trim(),
+      h2o: parseFloat(document.getElementById("dlg-water").value),
+      aw: parseFloat(document.getElementById("dlg-aw").value),
+      note: document.getElementById("dlg-note").value.trim()
+    };
+    await upsertCustomIngredient(ing);
+    dialog.close();
+    await populateIngredientList();
+  });
+}
+
 /* -------------------------------------------------
    BOOT
 --------------------------------------------------*/
