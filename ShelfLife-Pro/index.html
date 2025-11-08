@@ -54,6 +54,46 @@
                 <th>Acqua Totale</th><th>Acqua Libera</th><th>—</th>
               </tr>
             </thead>
+            <!-- Campo ingrediente con datalist e tasto per aggiungerne di nuovi -->
+<tr class="ingredient-input-row">
+  <td colspan="7">
+    <div style="display:flex; gap:8px; align-items:center;">
+      <input id="ing-name-input" list="ingredients-datalist" placeholder="Cerca ingrediente..." style="flex:1;" />
+      <datalist id="ingredients-datalist"></datalist>
+      <button id="btn-add-ingredient" type="button" class="btn" title="Aggiungi nuovo ingrediente">➕</button>
+    </div>
+  </td>
+</tr>
+
+<!-- Dialog per aggiungere o modificare ingredienti -->
+<dialog id="dlg-ingredient">
+  <form method="dialog" id="dlg-ingredient-form" style="display:flex; flex-direction:column; gap:8px; min-width:250px;">
+    <h3 id="dlg-ingredient-title">Aggiungi ingrediente</h3>
+
+    <label>Nome
+      <input id="dlg-name" required />
+    </label>
+
+    <label>% H₂O
+      <input id="dlg-water" type="number" min="0" max="100" step="0.1" required />
+    </label>
+
+    <label>aw
+      <input id="dlg-aw" type="number" min="0" max="1" step="0.01" required />
+    </label>
+
+    <label>Note (facoltative)
+      <input id="dlg-note" />
+    </label>
+
+    <div style="display:flex; justify-content:space-between; margin-top:6px;">
+      <button value="cancel">Annulla</button>
+      <button id="dlg-save" value="default" class="primary">Salva</button>
+    </div>
+  </form>
+</dialog>
+
+<small><a href="#" id="link-manage-ingredients">Gestisci ingredienti personali</a></small>
             <tbody></tbody>
           </table>
           <button id="btnAdd" class="btn line">+ Aggiungi riga</button>
