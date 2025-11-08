@@ -1,14 +1,18 @@
-// scripts/supabaseClient.js
-
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const supabaseUrl = "const supabaseUrl = "https://zzpcvjbykvxjyflpcxvr.supabase.co";
-"; //
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6cGN2amJ5a3Z4anlmbHBjeHZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1OTY5MDIsImV4cCI6MjA3ODE3MjkwMn0.DrTQVzzDfTcsxBFL_4M7h8eQmslBfn0bhjNdnnpHl5c"; // <-- sostituisci con la tua chiave pubblica anon
+// Legge le variabili ambiente impostate su Vercel
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
 
-// 🚀 Crea il client Supabase
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Se mancano, mostra un errore in console
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error("❌ Supabase URL o ANON KEY mancanti! Controlla le variabili su Vercel.");
+}
 
-// ✅ Test: scrive nel log se la connessione è attiva
-console.log("✅ Supabase Client caricato correttamente:", supabaseUrl);
+// Crea il client Supabase
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Log per debug
+console.log("✅ Supabase Client caricato:", SUPABASE_URL);
+
 
