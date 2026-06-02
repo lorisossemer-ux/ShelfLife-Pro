@@ -1,269 +1,399 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ShelfLife Pro 💧</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="https://accounts.google.com/gsi/client"></script>
-</head>
-<body>
-    <div id="loading-screen" class="loading-screen">
-          <div class="loader"></div>div>
-          <p id="loadingText">⏳ Caricamento...</p>p>
-    </div>div>
 
-    <div id="appContainer" style="display:none">
-          <div class="container">
-                  <div class="header">
-                            <h1>ShelfLife <span>Pro</span> 💧</h1>
-                          <p class="subinfo">Shelf life calculator con Google Drive</p>p>
-                  </div>div>
-          
-                <div class="top-controls">
-                        <input id="recipeName" type="text" placeholder="Nome ricetta (es. Pan di Spagna Classico)">
+<html lang="it">
+
+    <head>
+
+          <meta charset="UTF-8" />
+
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+          <!-- BLOCCO INDICIZZAZIONE -->
+
+          <meta name="robots" content="noindex, nofollow" />
+
+          <title>ShelfLife App20</title>
+    
+      <!-- CSS -->
+    
+      <link rel="stylesheet" href="./assets/style.css" />
+    
+      <!-- Google Identity Services -->
+    
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    </head>
+
+<body>
+
+      <!-- =========================
+
+           LOADING
+
+           ========================= -->
+
+      <div id="loading" class="card loading-card">
+
+              <h2>ShelfLife App20</h2>
+      
+          <p id="loadingText">Avvio...</p>p>
+      
+      </div>div>
+
+  <!-- =========================
+
+       APP
+
+       ========================= -->
+
+  <div id="appContainer" style="display:none;">
+  
+      <!-- =========================
+  
+           TOP PANEL
+  
+           ========================= -->
+  
+      <div class="card top-card">
+      
+            <label for="recipeName">Nome ricetta</label>label>
+      
+            <input
+                
+                        id="recipeName"
+                
+                        type="text"
+                
+                        placeholder="Nome ricetta (es. Ganache 1:1, Pan di Spagna...)"
+                
+                      />
+      
+            <!-- Categoria -->
+      
+            <div class="categoria-wrap">
+            
+                    <span class="badge" id="categoriaBadge">
+                    
+                              Da forno
+                    
+                    </span>span>
+            
+                    <button id="btnEditCategoria" class="btn-yellow">
+                    
+                              ✏️ Modifica
+                    
+                    </button>button>
+            
+                    <select id="categoriaProdotto" style="display:none;">
+                    
+                              <option value="da_forno">Da forno</option>option>
+                    
+                              <option value="secco">Secco</option>option>
+                    
+                              <option value="fritto">Fritto</option>option>
+                    
+                              <option value="fresco">Fresco</option>option>
+                    
+                              <option value="crema">Crema / Emulsione</option>option>
+                    
+                              <option value="intermedia">Intermedia</option>option>
+                    
+                              <option value="ganache_taglio">Ganache da taglio / Ripieno</option>option>
+                    
+                              <option value="ganache_morbida">Ganache morbida / Emulsione</option>option>
+                    
+                    </select>select>
+            
+            </div>div>
+      
+            <!-- Bottoni -->
+      
+            <div class="btn-group">
+            
+                    <button id="btnNew" class="btn-blue">
+                    
+                              🆕 Nuova
+                    
+                    </button>button>
+            
+                    <button id="btnDuplicate" class="btn-yellow">
+                    
+                              📄 Duplica
+                    
+                    </button>button>
+            
+                    <button id="btnSave" class="btn-green">
+                    
+                              💾 Salva
+                    
+                    </button>button>
+            
+                    <button id="btnDelete" class="btn-red">
+                    
+                              🗑️ Elimina
+                    
+                    </button>button>
+            
+            </div>div>
+      
+      </div>div>
+  
+      <!-- =========================
+  
+           RISULTATI
+  
+           ========================= -->
+  
+      <div class="card panel">
+      
+            <h2 class="section-title">
+
+                        📊 Risultati
+
+            </h2>
+
+                <div class="risultati-box">
+
+                            <div class="result-row">
+
+                                          <span>Totale acqua:</span>
+                            
+                                      <strong id="totAcqua">0.0 g</strong>strong>
+                            
+                            </div>div>
+                
+                        <div class="result-row">
                         
-                        <div class="categoria-box">
-                                  <span class="categoria-label">Categoria:</span>
-                                  <div class="categoria-badge" id="categoriaBadge">—</div>div>
-                                  <button id="btnEditCategoria" class="btn mini">✏️ Modifica</button>button>
-                                  <select id="categoriaProdotto" class="categoria-select" style="display:none">
-                                              <option value="">— Seleziona —</option>option>
-                                              <option value="da_forno">Da forno</option>option>
-                                              <option value="fritto">Fritto</option>option>
-                                              <option value="secco">Secco</option>option>
-                                              <option value="fresco">Fresco</option>option>
-                                              <option value="crema">Crema / Emulsione</option>option>
-                                              <option value="intermedia">Intermedia</option>option>
-                                  </select>select>
+                                  <span>Acqua libera:</span>
+                        
+                                  <strong id="acquaLibera">0.0 g</strong>strong>
+                        
                         </div>div>
                 
-                        <div class="btn-row">
-                                  <button id="btnNew" class="btn big">🆕 Nuova</button>button>
-                                  <button id="btnDuplicate" class="btn big">📄 Duplica</button>button>
-                                  <button id="btnSave" class="btn primary big">💾 Salva</button>button>
+                        <div class="result-row">
+                        
+                                  <span>aw media:</span>
+                        
+                                  <strong id="awMedia">0.00</strong>strong>
+                        
                         </div>div>
+                
+                        <div class="result-row">
+                        
+                                  <span>Rischio:</span>
+                        
+                                  <strong id="rischio">—</strong>strong>
+                        
+                        </div>div>
+                
+                        <div class="result-row">
+                        
+                                  <span>Shelf life stimata:</span>
+                        
+                                  <strong id="shelfLife">—</strong>strong>
+                        
+                        </div>div>
+                
+                        <div class="result-row">
+                        
+                                  <span>Conservazione consigliata:</span>
+                        
+                                  <strong id="consigli">—</strong>strong>
+                        
+                        </div>div>
+                
                 </div>div>
-          
-                <table class="ingredients-table" id="ingredienti">
-                        <thead>
-                                    <tr>
-                                                  <th>Ingrediente</th>
-                                    <th>g</th>
-                                    <th>% H₂O</th>
-                                    <th>aw</th>
-                                    <th>Acqua Totale</th>
-                                    <th>Acqua Libera</th>
-                                    <th>—</th>
-                                    </tr>
-                        </thead>
-                        <tbody></tbody>
-                </table>table>
-          
-                <div class="add-row-wrap">
-                        <button id="btnAdd" class="btn line">+ Aggiungi riga</button>button>
-                </div>div>
-          
-                <div class="results">
-                        <strong>Totale acqua:</strong> <span id="totAcqua">0.0 g</span><br>
-                        <strong>Acqua libera:</strong> <span id="acquaLibera">0.0 g</span><br>
-                        <strong>aw media:</strong> <span id="awMedia">0.00</span><br>
-                        <strong>Rischio:</strong> <span id="rischio">—</span><br>
-                        <strong>Shelf life stimata:</strong> <span id="shelfLife">—</span><br>
-                        <strong>Conservazione:</strong> <span id="consigli">—</span>
-                </div>div>
-          
-                <div class="aw-table">
-                        <h3>💧 Interpretazione valori aw</h3>
-                        <table>
-                                    <tr>
+      
+      </div>div>
+  
+      <!-- =========================
+  
+           INTERPRETAZIONE aw
+  
+           ========================= -->
+  
+      <div class="card panel">
+      
+            <h2 class="section-title">
+            
+                    💧 Interpretazione valori aw
+            
+            </h2>
+      
+            <table class="aw-table">
+            
+                    <thead>
+
+                                  <tr>
+
                                                   <th>Indicatore</th>
-                                    <th>aw</th>
-                                    <th>Stabilità</th>
-                                    <th>Rischio</th>
-                                    </tr>
-                                  <tr>
-                                                <td><span class="dot red"></span></td>
-                                    <td>0.95–1.00</td>
-                                    <td>Altissima umidità</td>
-                                    <td>Altissimo (batteri+muffe)</td>
+                    
+                                <th>aw</th>
+                    
+                                <th>Stabilità</th>
+                    
+                                <th>Rischio microbiologico</th>
+                    
                                   </tr>
+                    
+                    </thead>
+            
+                    <tbody>
+
                                   <tr>
-                                                <td><span class="dot yellow"></span>span></td>td>
-                                                <td>0.85–0.94</td>td>
-                                                <td>Media umidità</td>td>
-                                                <td>Medio (muffe/lieviti)</td>td>
+
+                                                  <td><span class="dot red"></span></td>
+            
+                        <td>0.95–1.00</td>
+            
+                        <td>Alta umidita</td>
+            
+                        <td>Altissimo – batteri e muffe</td>
+            
                                   </tr>
-                                    <tr>
+            
+                      <tr>
+
+                                      <td><span class="dot yellow"></span>span></td>td>
+
+                                      <td>0.85–0.94</td>td>
+
+                                      <td>Media umidita</td>td>
+
+                                      <td>Medio – muffe, lieviti</td>td>
+
+                      </tr>
+
+                                  <tr>
+
                                                   <td><span class="dot green"></span>span></td>
-                                    <td>0.65–0.84</td>
-                                    <td>Stabile</td>
-                                    <td>Basso</td>
-                                    </tr>
-                                  <tr>
-                                                <td><span class="dot lightgreen"></span>span></td>td>
-                                                <td>&lt;0.60</td>td>
-                                                <td>Secco</td>td>
-                                                <td>Minimo</td>td>
+            
+                        <td>0.65–0.84</td>
+            
+                        <td>Prodotto stabile</td>
+            
+                        <td>Basso – lieviti osmofili</td>
+            
                                   </tr>
-                        </table>
-                </div>div>
+            
+                      <tr>
 
-                  <div class="archivioBox">
-                            <h3>📁 Archivio ricette</h3>
-                            <div class="archivio" id="archivio"></div>div>
-                  </div>div>
+                                      <td><span class="dot lightgreen"></span>span></td>td>
+
+                                      <td>&lt;0.60</td>td>
+
+                                      <td>Secco</td>td>
+
+                                      <td>Minimo – stabile a lungo</td>td>
+
+                      </tr>
+
+                    </tbody>
+
+            </table>table>
+
+      </div>div>
+
+          <!-- =========================
+
+               INGREDIENTI
+
+               ========================= -->
+
+          <div class="card panel">
+
+                    <h2 class="section-title">
+
+                                Ingredienti
+
+                    </h2>
+
+                    <table id="ingredienti">
+
+                                <thead>
+
+                                              <tr>
+
+                                                              <th>Ingrediente</th>
+                                
+                                            <th>g.</th>
+                                
+                                            <th>% H₂O</th>
+                                
+                                            <th>aw</th>
+                                
+                                            <th>Acqua Totale</th>
+                                
+                                            <th>Acqua Libera</th>
+                                
+                                            <th>—</th>
+                                
+                                              </tr>
+                                
+                                </thead>
+                    
+                            <tbody>
+
+                                          <!-- generate da JS -->
+
+                            </tbody>
+
+                    </table>table>
+
+                    <button id="btnAdd" class="btn-yellow add-btn">
+
+                                ➡️ Aggiungi ingrediente
+
+                    </button>button>
+
           </div>div>
-    </div>div>
 
-    <script src="assets/app.js"></script>
+          <!-- =========================
+
+               ARCHIVIO
+
+               ========================= -->
+
+          <div class="card panel">
+
+                    <h2 class="section-title">
+
+                                📂 Archivio ricette
+
+                    </h2>
+
+                    <input
+
+                                id="searchRicette"
+
+                                type="text"
+
+                                placeholder="Cerca ricetta..."
+
+                              />
+
+                    <div id="archivio"></div>div>
+
+          </div>div>
+
+  </div>div>
+
+      <!-- JS -->
+
+      <script src="./assets/app.js"></script>
+
 </body>
+
 </html>html>
-                                  </tr></td></td>
-                                    </tr>
-                                  </tr></td></td>
-                                  </tr></th></th>
-                                    </tr>
-                        </table></strong></strong></tbody></th></th>
-                                    </tr>
-                        </thead></span></h1>
+                            </tbody></th></th>
+                                              </tr>
+                      </tr></td></td>
+                                  </tr>
+                      </tr></td></td>
+                                  </tr>
+                    </tbody></th></th>
+                                  </tr>
+                    </thead></span></span>
+            </h2>
 </body></title>
-</head><!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ShelfLife Pro 💧</title>
-  <link rel="stylesheet" href="assets/style.css" />
-</head>
-<body>
-  <div class="wrap">
-    <header class="topbar">
-      <h1>ShelfLife <span class="emph">Pro</span> 💧</h1>
-
-      <!-- AUTH -->
-      <div id="authBox" class="authbox">
-        <button id="btnLoginEmail" class="btn primary">🔐 Accedi (Email)</button>
-        <button id="btnLoginGoogle" class="btn ghost">G</button>
-        <span id="userBadge" class="pill" style="display:none"></span>
-        <button id="btnLogout" class="btn" style="display:none">Esci</button>
-      </div>
-    </header>
-
-    <main class="grid">
-      <!-- EDITOR -->
-      <section class="card editor">
-        <div class="row gap">
-          <input id="recipeName" class="input name" placeholder="Nome ricetta (es. Pan di Spagna Classico)" />
-          <select id="categoria" class="input">
-            <option value="">— Categoria —</option>
-            <option value="Basi cotte">Basi cotte</option>
-            <option value="Basi crude / Creme">Basi crude / Creme</option>
-            <option value="Lievitati dolci">Lievitati dolci</option>
-            <option value="Gluten free / Speciali">Gluten free / Speciali</option>
-            <option value="Varie o semilavorati">Varie o semilavorati</option>
-          </select>
-          <label class="radio"><input type="radio" name="tipoProdotto" value="crudo" checked /> Crudo</label>
-          <label class="radio"><input type="radio" name="tipoProdotto" value="cotto" /> Cotto</label>
-        </div>
-
-        <textarea id="descrizione" class="input" rows="2" placeholder="Descrizione breve (facoltativa)"></textarea>
-
-        <div class="row gap">
-          <button id="btnNew" class="btn">🆕 Nuova</button>
-          <button id="btnDuplicate" class="btn">📄 Duplica</button>
-          <button id="btnSave" class="btn success">💾 Salva</button>
-          <span id="statusBox" class="muted"></span>
-        </div>
-
-        <div class="tablewrap">
-          <table id="ingredienti">
-            <thead>
-              <tr>
-                <th>Ingrediente</th><th>g</th><th>% H₂O</th><th>aw</th>
-                <th>Acqua Totale</th><th>Acqua Libera</th><th>—</th>
-              </tr>
-            </thead>
-            <!-- Campo ingrediente con datalist e tasto per aggiungerne di nuovi -->
-<tr class="ingredient-input-row">
-  <td colspan="7">
-    <div style="display:flex; gap:8px; align-items:center;">
-      <input id="ing-name-input" list="ingredients-datalist" placeholder="Cerca ingrediente..." style="flex:1;" />
-      <datalist id="ingredients-datalist"></datalist>
-      <button id="btn-add-ingredient" type="button" class="btn" title="Aggiungi nuovo ingrediente">➕</button>
-    </div>
-  </td>
-</tr>
-
-<!-- Dialog per aggiungere o modificare ingredienti -->
-<dialog id="dlg-ingredient">
-  <form method="dialog" id="dlg-ingredient-form" style="display:flex; flex-direction:column; gap:8px; min-width:250px;">
-    <h3 id="dlg-ingredient-title">Aggiungi ingrediente</h3>
-
-    <label>Nome
-      <input id="dlg-name" required />
-    </label>
-
-    <label>% H₂O
-      <input id="dlg-water" type="number" min="0" max="100" step="0.1" required />
-    </label>
-
-    <label>aw
-      <input id="dlg-aw" type="number" min="0" max="1" step="0.01" required />
-    </label>
-
-    <label>Note (facoltative)
-      <input id="dlg-note" />
-    </label>
-
-    <div style="display:flex; justify-content:space-between; margin-top:6px;">
-      <button value="cancel">Annulla</button>
-      <button id="dlg-save" value="default" class="primary">Salva</button>
-    </div>
-  </form>
-</dialog>
-
-<small><a href="#" id="link-manage-ingredients">Gestisci ingredienti personali</a></small>
-            <tbody></tbody>
-          </table>
-          <button id="btnAdd" class="btn line">+ Aggiungi riga</button>
-        </div>
-
-        <div class="results">
-          <div><b>Totale acqua:</b> <span id="totAcqua">0.0 g</span></div>
-          <div><b>Acqua libera:</b> <span id="totLibera">0.0 g</span></div>
-          <div><b>aw media:</b> <span id="awMedia">0.00</span></div>
-          <div><b>Rischio:</b> <span id="rischio">—</span></div>
-          <div><b>Shelf life stimata:</b> <span id="shelfLife">—</span></div>
-          <div><b>Conservazione:</b> <span id="consigli">—</span></div>
-        </div>
-
-        <textarea id="notePrivate" class="input" rows="3" placeholder="Note private (visibili solo a te)"></textarea>
-      </section>
-
-      <!-- ARCHIVIO -->
-      <aside class="card archivio">
-        <h3>📁 Archivio ricette</h3>
-        <div id="archivioBox" class="list"></div>
-      </aside>
-
-      <!-- TABELLA AW -->
-      <section class="card aw">
-        <h3>💧 Interpretazione valori aw</h3>
-        <table class="awtab">
-          <thead><tr><th>Indicatore</th><th>aw</th><th>Stabilità</th><th>Rischio</th></tr></thead>
-          <tbody>
-            <tr><td><span class="dot red"></span></td><td>0.95–1.00</td><td>Altissima umidità</td><td>Altissimo (batteri+muffe)</td></tr>
-            <tr><td><span class="dot yellow"></span></td><td>0.85–0.94</td><td>Media umidità</td><td>Medio (muffe/lieviti)</td></tr>
-            <tr><td><span class="dot green"></span></td><td>0.65–0.84</td><td>Stabile</td><td>Basso</td></tr>
-            <tr><td><span class="dot lightgreen"></span></td><td>&lt;0.60</td><td>Secco</td><td>Minimo</td></tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
-  </div>
-
-  <script type="module" src="scripts/supabaseClient.js"></script>
-  <script type="module" src="assets/app.js"></script>
-</body>
-</html>
+    </head>
