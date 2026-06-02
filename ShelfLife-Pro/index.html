@@ -1,6 +1,136 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShelfLife Pro 💧</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://accounts.google.com/gsi/client"></script>
+</head>
+<body>
+    <div id="loading-screen" class="loading-screen">
+          <div class="loader"></div>div>
+          <p id="loadingText">⏳ Caricamento...</p>p>
+    </div>div>
+
+    <div id="appContainer" style="display:none">
+          <div class="container">
+                  <div class="header">
+                            <h1>ShelfLife <span>Pro</span> 💧</h1>
+                          <p class="subinfo">Shelf life calculator con Google Drive</p>p>
+                  </div>div>
+          
+                <div class="top-controls">
+                        <input id="recipeName" type="text" placeholder="Nome ricetta (es. Pan di Spagna Classico)">
+                        
+                        <div class="categoria-box">
+                                  <span class="categoria-label">Categoria:</span>
+                                  <div class="categoria-badge" id="categoriaBadge">—</div>div>
+                                  <button id="btnEditCategoria" class="btn mini">✏️ Modifica</button>button>
+                                  <select id="categoriaProdotto" class="categoria-select" style="display:none">
+                                              <option value="">— Seleziona —</option>option>
+                                              <option value="da_forno">Da forno</option>option>
+                                              <option value="fritto">Fritto</option>option>
+                                              <option value="secco">Secco</option>option>
+                                              <option value="fresco">Fresco</option>option>
+                                              <option value="crema">Crema / Emulsione</option>option>
+                                              <option value="intermedia">Intermedia</option>option>
+                                  </select>select>
+                        </div>div>
+                
+                        <div class="btn-row">
+                                  <button id="btnNew" class="btn big">🆕 Nuova</button>button>
+                                  <button id="btnDuplicate" class="btn big">📄 Duplica</button>button>
+                                  <button id="btnSave" class="btn primary big">💾 Salva</button>button>
+                        </div>div>
+                </div>div>
+          
+                <table class="ingredients-table" id="ingredienti">
+                        <thead>
+                                    <tr>
+                                                  <th>Ingrediente</th>
+                                    <th>g</th>
+                                    <th>% H₂O</th>
+                                    <th>aw</th>
+                                    <th>Acqua Totale</th>
+                                    <th>Acqua Libera</th>
+                                    <th>—</th>
+                                    </tr>
+                        </thead>
+                        <tbody></tbody>
+                </table>table>
+          
+                <div class="add-row-wrap">
+                        <button id="btnAdd" class="btn line">+ Aggiungi riga</button>button>
+                </div>div>
+          
+                <div class="results">
+                        <strong>Totale acqua:</strong> <span id="totAcqua">0.0 g</span><br>
+                        <strong>Acqua libera:</strong> <span id="acquaLibera">0.0 g</span><br>
+                        <strong>aw media:</strong> <span id="awMedia">0.00</span><br>
+                        <strong>Rischio:</strong> <span id="rischio">—</span><br>
+                        <strong>Shelf life stimata:</strong> <span id="shelfLife">—</span><br>
+                        <strong>Conservazione:</strong> <span id="consigli">—</span>
+                </div>div>
+          
+                <div class="aw-table">
+                        <h3>💧 Interpretazione valori aw</h3>
+                        <table>
+                                    <tr>
+                                                  <th>Indicatore</th>
+                                    <th>aw</th>
+                                    <th>Stabilità</th>
+                                    <th>Rischio</th>
+                                    </tr>
+                                  <tr>
+                                                <td><span class="dot red"></span></td>
+                                    <td>0.95–1.00</td>
+                                    <td>Altissima umidità</td>
+                                    <td>Altissimo (batteri+muffe)</td>
+                                  </tr>
+                                  <tr>
+                                                <td><span class="dot yellow"></span>span></td>td>
+                                                <td>0.85–0.94</td>td>
+                                                <td>Media umidità</td>td>
+                                                <td>Medio (muffe/lieviti)</td>td>
+                                  </tr>
+                                    <tr>
+                                                  <td><span class="dot green"></span>span></td>
+                                    <td>0.65–0.84</td>
+                                    <td>Stabile</td>
+                                    <td>Basso</td>
+                                    </tr>
+                                  <tr>
+                                                <td><span class="dot lightgreen"></span>span></td>td>
+                                                <td>&lt;0.60</td>td>
+                                                <td>Secco</td>td>
+                                                <td>Minimo</td>td>
+                                  </tr>
+                        </table>
+                </div>div>
+
+                  <div class="archivioBox">
+                            <h3>📁 Archivio ricette</h3>
+                            <div class="archivio" id="archivio"></div>div>
+                  </div>div>
+          </div>div>
+    </div>div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>html>
+                                  </tr></td></td>
+                                    </tr>
+                                  </tr></td></td>
+                                  </tr></th></th>
+                                    </tr>
+                        </table></strong></strong></tbody></th></th>
+                                    </tr>
+                        </thead></span></h1>
+</body></title>
+</head><!DOCTYPE html>
+<html lang="it">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ShelfLife Pro 💧</title>
